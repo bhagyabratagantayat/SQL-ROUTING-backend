@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <h1>The total number of user are : <%= count %> </h1>
+    <h1>List of users</h1>
+    <form action="/user/newuser" method="get">
+        <button>add new user</button> <br><br>
+    </form>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>username</th>
+            <th>Email</th>
+            <th>Edit</th>
+            <th>delete user</th>
+        </tr>
+        <% for(user of users){ %>
+        <tr>
+            <td><%= user.id %></td>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+            <td>
+                <form action="user/<%= user.id %>/edit" method="get">
+                    <button>edit user</button>
+                </form>
+            </td>
+            <td>
+                <form action="user/<%= user.id %>/delete" method="get">
+                    <button>delete</button>
+                </form>
+            </td>
+        </tr>
+        <% } %>
+    </table>
+
+</body>
+
+</html>

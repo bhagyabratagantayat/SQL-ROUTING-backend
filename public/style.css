@@ -1,0 +1,102 @@
+/* Global reset & fonts */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom right, #ecfdf5, #d1fae5);
+  margin: 0;
+  padding: 20px;
+  color: #022c22;
+}
+
+/* Page heading */
+h1 {
+  text-align: center;
+  color: #065f46;
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+
+/* Add User Button */
+form[action="/user/newuser"] button {
+  display: block;
+  margin: 0 auto 20px auto;
+  background-color: #10b981;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+form[action="/user/newuser"] button:hover {
+  background-color: #059669;
+}
+
+/* Table styling */
+table {
+  width: 90%;
+  margin: auto;
+  border-collapse: collapse;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+}
+
+/* Table header */
+th {
+  background-color: #047857;
+  color: white;
+  padding: 14px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+/* Table rows */
+td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #d1fae5;
+}
+
+/* Zebra row effect */
+tr:nth-child(even) {
+  background-color: #ecfdf5;
+}
+
+tr:nth-child(odd) {
+  background-color: #fefefe;
+}
+
+/* Row hover */
+tr:hover {
+  background-color: #a7f3d0;
+  transition: 0.2s ease-in-out;
+}
+
+/* Action buttons (edit & delete) */
+td form button {
+  background-color: #34d399;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 5px;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+td form button:hover {
+  background-color: #059669;
+}
+
+/* Delete button specific */
+td form[action*="delete"] button {
+  background-color: #dc2626;
+}
+
+td form[action*="delete"] button:hover {
+  background-color: #991b1b;
+}
