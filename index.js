@@ -6,29 +6,28 @@ const path = require("path");
 const { count } = require("console");
 const methodOverride = require("method-override");
 
+require("dotenv").config(); // load .env
+
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(methodOverride("_method"));
 app.use(express.static("public"));
 
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 
 let data = [];
 
-// Create the connection to database
+// // Create the connection to database
 const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  database: "MYSERVER",
-  password: "Pilu@143",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
 });
 
 let getRandomUser = () => {
@@ -74,7 +73,6 @@ app.get("/users", (req, res) => {
     res.send("some error in database");
   }
 });
-
 // Edit route
 app.get("/user/:id/edit", (req, res) => {
   let { id } = req.params;
@@ -120,7 +118,6 @@ app.patch("/user/:id", (req, res) => {
   }
 });
 
-
 //ADD NEW USER
 app.get("/user/newuser", (req, res) => {
   res.render("newuser.ejs");
@@ -137,15 +134,15 @@ app.post("/users", (req, res) => {
   try {
     connection.query(q, values, (err, result) => {
       if (err) {
-        console.log("❌ Database Error:", err.sqlMessage);
+        console.log("Database Error:", err.sqlMessage);
         res.send("Database Error: " + err.sqlMessage);
       } else {
-        console.log("✅ User Added:", result);
+        console.log("User Added:", result);
         res.redirect("/users");
       }
     });
   } catch (err) {
-    console.log("🔥 Unexpected Error:", err.message);
+    console.log("Unexpected Error:", err.message);
     res.send("Some Error: " + err.message);
   }
 });
@@ -180,7 +177,7 @@ app.delete("/user/:id", (req, res) => {
 
     let user = result[0];
     if (user.password !== formpass) {
-      return res.send("Wrong password ❌");
+      return res.send("Wrong password ");
     }
 
     let q2 = `DELETE FROM users WHERE id='${id}'`;
@@ -190,7 +187,6 @@ app.delete("/user/:id", (req, res) => {
     });
   });
 });
-
 
 app.listen(port, (req, res) => {
   console.log(`server is running at ${port}`);
